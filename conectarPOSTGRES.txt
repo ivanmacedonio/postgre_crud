@@ -1,0 +1,41 @@
+creamos  la  bbdd desde postgre console yl nombre de esa db
+lo indicamos en settings  
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'tasksdb',
+        'USER': 'soporte',
+        'PASSWORD':  'mamageor28',
+        'HOST': 'localhost',
+        'PORT' : '5432,'
+    }
+}
+
+en ese apartado debemos indicar todos los datos de la base de datos creada en postgres 
+tanto como el usuario que tiene acceso a ella, su pass, etc ...
+
+para conectar django a postgres usamos psycopg2, asique lo instalamos con  pip
+
+creamos las tablas en models y las eenviamos a la base de datos mediante el migrate 
+
+-con \c X  nos conectamos a la base de datos que le indiquemos en X 
+
+-con \l muestra las tablas disponibles  
+
+-una vez conectados, seguimos normal creando views, etc .. 
+
+-URLS 
+
+si en la url tasks/ hacemos include de new/ y put/, los accesos seran 
+tasks/new/ 
+tasks/put/
+
+--INSERTAR UN DATO (view)
+
+
+def create_task(request):
+    task= Task(title=request.POST['title'], description=request.POST['description'])
+    task.save()
+    return redirect('/tasks/') 
+
